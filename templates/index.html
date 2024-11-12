@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Суммаризатор статей</title>
+    <link rel="stylesheet" href="static/style.css">
+    <script src="scripts/script.js" defer></script>
+    <link rel="icon" type="image/png" href="static/icon.png" />
+</head>
+
+<body>
+    <main>
+        <h1>Суммаризатор статей</h1>
+        <div class="menu">
+            <form class="menu__input" action="POST" onsubmit="handleFormSubmit(event)">
+                <label class="switch">
+                    <input type="checkbox" id="toggle-input" onclick="toggleMode(this)">
+                    <span class="slider"></span>
+                    <span class="switch-text">Ввести текст / Выбрать PDF</span>
+                </label>
+
+                <div class="input__file show">
+                    <input type="file" id="file-input" accept=".pdf">
+                    <label for="file-input" class="file-button">
+                        <span class="file-button__text">Выбрать PDF</span>
+                    </label>
+                    <img src="static/close.svg" class="close" onclick="resetFile()">
+                </div>
+
+                <div class="input__text">
+                    <textarea spellcheck="false" id="input__text" placeholder="Ваш текст"></textarea>
+                </div>
+
+                <div class="input__range">
+                    <span>% Сжатия текста</span>
+                    <span class="procent">100%</span>
+                    <input type="range" id="range-input" min=0 max=100 value=100 oninput="changeProcent()">
+                </div>
+
+                <button type="submit" class="input-btn">Суммаризовать</button>
+            </form>
+
+            <form action="GET" class="menu__output">
+                <div class="menu__output__text" id="output-panel"></div>
+                <div class="loading-spinner" id="loading-spinner" style="display: none;"></div>
+            </form>
+        </div>
+
+        <div id="overlay" class="overlay" style="display: none;">
+            <div class="loading-spinner"></div>
+        </div>
+    </main>
+</body>
+
+</html>
